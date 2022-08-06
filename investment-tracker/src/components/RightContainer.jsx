@@ -9,7 +9,7 @@ function RightContainer() {
 
 const useStyles = makeStyles({
   rightContainer: {
-    backgroundColor: "blue",
+    backgroundColor: "#c8c8ff",
     width: "50%",
     height: "100%",
   },
