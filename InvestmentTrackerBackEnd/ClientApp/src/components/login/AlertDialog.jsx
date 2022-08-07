@@ -1,4 +1,4 @@
-import * as React from "react";
+import { React, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -6,9 +6,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
+import { sendLoginRequest } from "../../utils.js";
 
 export default function AlertDialog() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const classes = useStyles();
 
@@ -17,6 +20,8 @@ export default function AlertDialog() {
   };
 
   const handleClose = () => {
+    sendLoginRequest(username, password);
+
     setOpen(false);
   };
 
@@ -39,12 +44,16 @@ export default function AlertDialog() {
             className={classes.loginField}
             id="outlined-required"
             label="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             className={classes.loginField}
             id="outlined-password-input"
             label="Password"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
           />
         </DialogContent>

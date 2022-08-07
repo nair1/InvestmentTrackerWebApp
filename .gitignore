@@ -1,0 +1,5 @@
+*.dll
+InvestmentTrackerBackEnd/bin
+InvestmentTrackerBackEnd/.vs
+InvestmentTrackerBackEnd/ClientApp/node_modules
+InvestmentTrackerBackEnd/obj
