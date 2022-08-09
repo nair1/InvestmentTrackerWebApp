@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { sendLoginRequest } from "../../utils.js";
+import { useEffect } from "react";
 
 export default function SignUpDialog(props) {
   const [userInfo, setUserInfo] = useState({
@@ -18,12 +19,28 @@ export default function SignUpDialog(props) {
     password: "",
   });
 
+  const [isInvalidSignup, setIsInvalidSignup] = useState(true);
+
   const classes = useStyles();
 
   const handleLogin = () => {
     sendLoginRequest(username.text, password.text);
     props.handleClose();
   };
+
+  useEffect(() => {
+    setIsInvalidSignup(
+      userInfo.firstName.length === 0 ||
+        userInfo.lastName.length === 0 ||
+        userInfo.email.length === 0 ||
+        userInfo.password.length === 0
+    );
+  }, [
+    userInfo.firstName,
+    userInfo.lastName,
+    userInfo.email,
+    userInfo.password,
+  ]);
 
   return (
     <div>
@@ -43,28 +60,59 @@ export default function SignUpDialog(props) {
         <DialogContent className={classes.loginFieldsContainer}>
           <TextField
             className={classes.loginField}
-            id="outlined-required"
             label="First Name"
+            value={userInfo.firstName}
+            onChange={(e) =>
+              setUserInfo({
+                ...userInfo,
+                firstName: e.target.value,
+              })
+            }
           />
           <TextField
             className={classes.loginField}
-            id="outlined-required"
             label="Last Name"
+            value={userInfo.lastName}
+            onChange={(e) =>
+              setUserInfo({
+                ...userInfo,
+                lastName: e.target.value,
+              })
+            }
           />
           <TextField
             className={classes.loginField}
-            id="outlined-required"
             label="Email"
+            value={userInfo.email}
+            onChange={(e) =>
+              setUserInfo({
+                ...userInfo,
+                email: e.target.value,
+              })
+            }
           />
           <TextField
             className={classes.loginField}
-            id="outlined-required"
             label="Username"
+            value={userInfo.username}
+            onChange={(e) =>
+              setUserInfo({
+                ...userInfo,
+                username: e.target.value,
+              })
+            }
           />
           <TextField
             className={classes.loginField}
             id="outlined-password-input"
             label="Password"
+            value={userInfo.password}
+            onChange={(e) =>
+              setUserInfo({
+                ...userInfo,
+                password: e.target.value,
+              })
+            }
             type="password"
             autoComplete="current-password"
           />
@@ -75,6 +123,7 @@ export default function SignUpDialog(props) {
             variant="contained"
             onClick={handleLogin}
             autoFocus
+            disabled={isInvalidSignup}
           >
             Sign Up
           </Button>

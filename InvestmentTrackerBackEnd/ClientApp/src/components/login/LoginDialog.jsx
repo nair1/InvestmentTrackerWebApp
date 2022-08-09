@@ -46,7 +46,6 @@ export default function LoginDialog(props) {
         <DialogContent className={classes.loginFieldsContainer}>
           <TextField
             className={classes.loginField}
-            id="outlined-required"
             label="Username"
             value={username.text}
             onChange={(e) =>
@@ -65,7 +64,6 @@ export default function LoginDialog(props) {
           />
           <TextField
             className={classes.loginField}
-            id="outlined-password-input"
             label="Password"
             type="password"
             value={password.text}
