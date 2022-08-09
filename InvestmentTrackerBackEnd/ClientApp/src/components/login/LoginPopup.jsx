@@ -27,8 +27,8 @@ export default function LoginPopup(props) {
   };
 
   const switchLoginToSignup = () => {
-    setLoginDialogOpen(false);
-    setSignupDialogOpen(true);
+    handleLoginDialogClose();
+    handleSignupDialogOpen();
   };
 
   return (

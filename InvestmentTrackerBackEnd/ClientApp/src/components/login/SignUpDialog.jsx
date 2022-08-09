@@ -11,14 +11,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { sendLoginRequest } from "../../utils.js";
 
 export default function SignUpDialog(props) {
-  const [username, setUsername] = useState({
-    text: "",
-    isStartupState: true,
-  });
-
-  const [password, setPassword] = useState({
-    text: "",
-    isStartupState: true,
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   });
 
   const classes = useStyles();
@@ -47,42 +44,29 @@ export default function SignUpDialog(props) {
           <TextField
             className={classes.loginField}
             id="outlined-required"
+            label="First Name"
+          />
+          <TextField
+            className={classes.loginField}
+            id="outlined-required"
+            label="Last Name"
+          />
+          <TextField
+            className={classes.loginField}
+            id="outlined-required"
+            label="Email"
+          />
+          <TextField
+            className={classes.loginField}
+            id="outlined-required"
             label="Username"
-            value={username.text}
-            onChange={(e) =>
-              setUsername({
-                ...username,
-                text: e.target.value,
-                isStartupState: false,
-              })
-            }
-            error={!username.isStartupState && username.text.length === 0}
-            helperText={
-              !username.isStartupState && username.text.length === 0
-                ? "Missing username!"
-                : ""
-            }
           />
           <TextField
             className={classes.loginField}
             id="outlined-password-input"
             label="Password"
             type="password"
-            value={password.text}
-            onChange={(e) =>
-              setPassword({
-                ...password,
-                text: e.target.value,
-                isStartupState: false,
-              })
-            }
             autoComplete="current-password"
-            error={!password.isStartupState && password.text.length === 0}
-            helperText={
-              !password.isStartupState && password.text.length === 0
-                ? "Missing password!"
-                : ""
-            }
           />
         </DialogContent>
         <DialogActions className={classes.dialogActions}>
@@ -91,17 +75,8 @@ export default function SignUpDialog(props) {
             variant="contained"
             onClick={handleLogin}
             autoFocus
-            disabled={username.text.length == 0 || password.text.length == 0}
           >
-            Login
-          </Button>
-          <Button
-            className={classes.buttons}
-            variant="outlined"
-            onClick={props.switchLoginWindow}
-            autoFocus
-          >
-            Don't have an account? Sign Up
+            Sign Up
           </Button>
         </DialogActions>
       </Dialog>
