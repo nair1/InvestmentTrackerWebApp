@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { sendLoginRequest } from "../../utils.js";
+import { sendSignupRequest } from "../../utils.js";
 import { useEffect } from "react";
 
 export default function SignUpDialog(props) {
@@ -16,6 +16,7 @@ export default function SignUpDialog(props) {
     firstName: "",
     lastName: "",
     email: "",
+    username: "",
     password: "",
   });
 
@@ -23,8 +24,8 @@ export default function SignUpDialog(props) {
 
   const classes = useStyles();
 
-  const handleLogin = () => {
-    sendLoginRequest(username.text, password.text); // TODO: Modify
+  const handleSignup = () => {
+    sendSignupRequest(userInfo); // TODO: Modify
     props.handleClose();
   };
 
@@ -121,7 +122,7 @@ export default function SignUpDialog(props) {
           <Button
             className={classes.buttons}
             variant="contained"
-            onClick={handleLogin}
+            onClick={handleSignup}
             autoFocus
             disabled={isInvalidSignup}
           >
