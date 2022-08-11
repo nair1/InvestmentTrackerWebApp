@@ -24,7 +24,7 @@ export default function SignUpDialog(props) {
   const classes = useStyles();
 
   const handleLogin = () => {
-    sendLoginRequest(username.text, password.text);
+    sendLoginRequest(username.text, password.text); // TODO: Modify
     props.handleClose();
   };
 
@@ -61,7 +61,7 @@ export default function SignUpDialog(props) {
           <TextField
             className={classes.loginField}
             label="First Name"
-            value={userInfo.firstName}
+            value={userInfo.firstName || ""}
             onChange={(e) =>
               setUserInfo({
                 ...userInfo,
@@ -72,7 +72,7 @@ export default function SignUpDialog(props) {
           <TextField
             className={classes.loginField}
             label="Last Name"
-            value={userInfo.lastName}
+            value={userInfo.lastName || ""}
             onChange={(e) =>
               setUserInfo({
                 ...userInfo,
@@ -83,7 +83,7 @@ export default function SignUpDialog(props) {
           <TextField
             className={classes.loginField}
             label="Email"
-            value={userInfo.email}
+            value={userInfo.email || ""}
             onChange={(e) =>
               setUserInfo({
                 ...userInfo,
@@ -94,7 +94,7 @@ export default function SignUpDialog(props) {
           <TextField
             className={classes.loginField}
             label="Username"
-            value={userInfo.username}
+            value={userInfo.username || ""}
             onChange={(e) =>
               setUserInfo({
                 ...userInfo,
@@ -106,7 +106,7 @@ export default function SignUpDialog(props) {
             className={classes.loginField}
             id="outlined-password-input"
             label="Password"
-            value={userInfo.password}
+            value={userInfo.password || ""}
             onChange={(e) =>
               setUserInfo({
                 ...userInfo,
