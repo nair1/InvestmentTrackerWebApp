@@ -16,5 +16,22 @@ namespace InvestmentTrackerBackEnd
         {
             return Ok($"Hello {userLogin.Username}:{userLogin.Password}");
         }
+
+        [HttpPost]
+        [Route("Signup")]
+        public IActionResult Signup([FromBody] UserSignup userSignup)
+        {
+            if (userSignup.IsValidUsername())
+            {
+                userSignup.Signup();
+
+                return Ok($"Hello {userSignup.Username}:{userSignup.Password}");
+            } else
+            {
+                return Ok($"Error: Username '{userSignup.Username}' is already taken!");
+            }
+        }
     }
+
+
 }
