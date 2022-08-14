@@ -15,11 +15,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		Sachin Nair
--- Create date: 8/10/22
--- Description:	Select all users from the USER_LOGINS table
+-- Create date: 8/14/22
+-- Description:	Gets number of users that have the same username as the username provided during signup.
 -- =============================================
-CREATE PROCEDURE SelectAllUsers 
+CREATE PROCEDURE GetNumberOfUsersWithSpecifiedUsername 
 	-- Add the parameters for the stored procedure here
+	@username varchar(max)
+
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -27,6 +29,8 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT * FROM USER_LOGINS
+	SELECT COUNT(USR_NM)
+	FROM USER_LOGINS
+	WHERE USR_NM=@username
 END
 GO

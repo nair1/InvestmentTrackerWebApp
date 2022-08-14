@@ -9,27 +9,42 @@ namespace InvestmentTrackerBackEnd
 {
     public class SQLUtils
     {
-        public static int ExecuteStoredProc(string storedProcNm)
+        public static DataTable ExecuteRead(string storedProcNm, List<SqlParameter> sqlParameters)
         {
             using (SqlConnection sqlcon = new SqlConnection(Constants.DB_CONNECTION_STRING))
             {
                 using (SqlCommand cmd = new SqlCommand(storedProcNm, sqlcon))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddRange(sqlParameters.ToArray());
 
                     using (SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(cmd))
                     {
                         DataTable dataTable = new DataTable();
                         sqlDataAdapter.Fill(dataTable);
 
-                        DataColumnCollection tableColumns = dataTable.Columns;
-
-                        //TODO: Dynamically assign columns to object properties
+                        return dataTable;
                     }
                 }
             }
+        }
 
-            return 0;
+        public static int ExecuteWrite(string storedProcNm, List<SqlParameter> sqlParameters)
+        {
+            using (SqlConnection sqlcon = new SqlConnection(Constants.DB_CONNECTION_STRING))
+            {
+                using (SqlCommand cmd = new SqlCommand(storedProcNm, sqlcon))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddRange(sqlParameters.ToArray());
+
+                    sqlcon.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    sqlcon.Close();
+
+                    return rowsAffected;
+                }
+            }
         }
     }
 }
