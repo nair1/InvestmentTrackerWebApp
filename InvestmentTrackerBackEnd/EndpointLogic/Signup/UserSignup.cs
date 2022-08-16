@@ -16,25 +16,25 @@ namespace InvestmentTrackerBackEnd
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public bool IsValidUsername()
-        {
-            DataTable resultDataTable;
-            const string STORED_PROC_NM = "GetNumberOfUsersWithSpecifiedUsername";
-            List<SqlParameter> sqlParameters = new List<SqlParameter>
-            {
-                new SqlParameter("@username", this.Username)
-            };
+        //public bool IsValidUsername()
+        //{
+        //    DataTable resultDataTable;
+        //    const string STORED_PROC_NM = "GetNumberOfUsersWithSpecifiedUsername";
+        //    List<SqlParameter> sqlParameters = new List<SqlParameter>
+        //    {
+        //        new SqlParameter("@username", this.Username)
+        //    };
 
-            try
-            {
-                resultDataTable = SQLUtils.ExecuteRead(STORED_PROC_NM, sqlParameters);
-            } catch (Exception ex)
-            {
-                throw;
-            }
+        //    try
+        //    {
+        //        resultDataTable = SQLUtils.ExecuteRead(STORED_PROC_NM, sqlParameters);
+        //    } catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
 
-            return (int)resultDataTable.Rows[0].ItemArray[0] == 0;
-        }
+        //    return (int)resultDataTable.Rows[0].ItemArray[0] == 0;
+        //}
 
         public bool Signup()
         {

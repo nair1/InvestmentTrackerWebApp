@@ -14,22 +14,37 @@ namespace InvestmentTrackerBackEnd
         [Route("Login")]
         public IActionResult Login([FromBody] UserLogin userLogin)
         {
-            return Ok($"Hello {userLogin.Username}:{userLogin.Password}");
+            bool isValidUsername = UserLogin.IsUsernameTaken(userLogin.Username);
+
+            if (!isValidUsername)
+            {
+                return Unauthorized("Error: username does not exist!");
+            }
+
+            bool isValidLogin = userLogin.Login();
+
+            if (!isValidLogin)
+            {
+                return Unauthorized("Error: Incorrect password!");
+            }
+
+            return Ok();
         }
 
         [HttpPost]
         [Route("Signup")]
         public IActionResult Signup([FromBody] UserSignup userSignup)
         {
-            if (userSignup.IsValidUsername())
-            {
-                userSignup.Signup();
+            bool isUsernameTaken = UserLogin.IsUsernameTaken(userSignup.Username);
 
-                return Ok($"Hello {userSignup.Username}:{userSignup.Password}");
-            } else
+            if (isUsernameTaken)
             {
-                return Ok($"Error: Username '{userSignup.Username}' is already taken!");
+                return Forbid("Error: Username is already taken!");
             }
+
+            userSignup.Signup();
+
+            return Ok();
         }
     }
 
