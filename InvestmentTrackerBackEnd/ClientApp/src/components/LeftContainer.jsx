@@ -1,13 +1,15 @@
-import React from "react";
+import { React, useState } from "react";
 import { makeStyles } from "@mui/styles";
-import AlertDialog from "./login/AlertDialog";
+import LoginPopup from "./login/LoginPopup";
 
 function LeftContainer() {
   const classes = useStyles();
 
+  const [loginMode, setLoginMode] = useState("");
+
   return (
     <div className={classes.leftContainer}>
-      <AlertDialog />
+      <LoginPopup loginMode={loginMode} setLoginMode={setLoginMode} />
     </div>
   );
 }
