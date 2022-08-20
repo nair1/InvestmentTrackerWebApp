@@ -1,26 +1,25 @@
-import React from "react";
+import { React, useState } from "react";
 import { makeStyles } from "@mui/styles";
-import LeftContainer from "./LeftContainer";
-import RightContainer from "./RightContainer";
+import LoginPopup from "./login/LoginPopup";
 
 function MainContainer() {
   const classes = useStyles();
 
+  const [loginMode, setLoginMode] = useState("");
+
   return (
     <div className={classes.mainContainer}>
-      <LeftContainer />
-      <RightContainer />
+      <LoginPopup loginMode={loginMode} setLoginMode={setLoginMode} />
     </div>
   );
 }
 
 const useStyles = makeStyles({
   mainContainer: {
-    backgroundColor: "green",
+    backgroundColor: "#ffc8c8",
     height: "100vh",
     width: "100vw",
     display: "flex",
-    flexDirection: "row",
   },
 });
 
