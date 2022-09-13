@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import LoginPopup from "./login/LoginPopup";
+import Portfolio from "./portfolio/Portfolio";
 
 function MainContainer() {
   const classes = useStyles();
@@ -10,6 +11,7 @@ function MainContainer() {
   return (
     <div className={classes.mainContainer}>
       <LoginPopup loginMode={loginMode} setLoginMode={setLoginMode} />
+      <Portfolio></Portfolio>
     </div>
   );
 }
