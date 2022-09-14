@@ -21,3 +21,15 @@ export function sendSignupRequest(userInfo) {
         .then(response => response.text())
         .then(text => console.log(text));
 }
+
+export function sendInvestmentRequest(username) {
+    fetch("api/Investment/GetInvestments", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(username),
+        })
+        .then((response) => response.text())
+        .then((text) => console.log(text));
+}

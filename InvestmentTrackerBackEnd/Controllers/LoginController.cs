@@ -47,6 +47,4 @@ namespace InvestmentTrackerBackEnd
             return Ok();
         }
     }
-
-
 }
